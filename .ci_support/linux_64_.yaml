@@ -17,7 +17,7 @@ pin_run_as_build:
     max_pin: x
   openssl:
     max_pin: x.x.x
-  zstd:
-    max_pin: x.x.x
+target_platform:
+- linux-64
 zstd:
-- 1.4.4
+- '1.4'
