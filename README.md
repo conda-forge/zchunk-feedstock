@@ -5,7 +5,7 @@ Home: https://github.com/zchunk/zchunk
 
 Package license: BSD-2-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/zchunk-feedstock/blob/master/LICENSE.txt)
 
 Summary: A file format designed for highly efficient deltas while maintaining good compression
 
@@ -39,6 +39,20 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=9259&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/zchunk-feedstock?branchName=master&jobName=linux&configuration=linux_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=9259&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/zchunk-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=9259&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/zchunk-feedstock?branchName=master&jobName=win&configuration=win_64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -143,5 +157,6 @@ Feedstock Maintainers
 
 * [@JohanMabille](https://github.com/JohanMabille/)
 * [@SylvainCorlay](https://github.com/SylvainCorlay/)
+* [@davidbrochart](https://github.com/davidbrochart/)
 * [@wolfv](https://github.com/wolfv/)
 
