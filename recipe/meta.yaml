@@ -24,6 +24,7 @@ requirements:
     - libcurl
     - openssl
     - zstd
+    - argp-standalone  # [osx]
   run:
     - libcurl
     - openssl
