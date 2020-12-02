@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
   sha256: eb3d531916d6fea399520a2a4663099ddbf2278088599fa09980631067dc9d7b
+  patches:
+    - osx_include_endian.h.patch  # [osx]
 
 build:
   number: 1
