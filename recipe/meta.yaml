@@ -10,6 +10,7 @@ source:
   sha256: eb3d531916d6fea399520a2a4663099ddbf2278088599fa09980631067dc9d7b
   patches:
     - osx_include_endian.h.patch  # [osx]
+    - osx_link_argp.patch  # [osx]
 
 build:
   number: 1
@@ -38,10 +39,10 @@ test:
     - test -f ${PREFIX}/bin/zck  # [unix]
     - test -f ${PREFIX}/include/zck.h  # [unix]
     - test -f ${PREFIX}/lib/pkgconfig/zck.pc  # [unix]
-    - if not exist %PREFIX%\\Library\\bin\\zck.dll exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\zck.lib exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\bin\\zck.exe exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\include\\zck.h exit 1  # [win]
+    - if not exist %LIBRARY_PREFIX%\\bin\\zck.dll exit 1  # [win]
+    - if not exist %LIBRARY_PREFIX%\\lib\\zck.lib exit 1  # [win]
+    - if not exist %LIBRARY_PREFIX%\\bin\\zck.exe exit 1  # [win]
+    - if not exist %LIBRARY_PREFIX%\\include\\zck.h exit 1  # [win]
 
 about:
   home: https://github.com/zchunk/zchunk
