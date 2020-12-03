@@ -8,10 +8,13 @@ package:
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
   sha256: eb3d531916d6fea399520a2a4663099ddbf2278088599fa09980631067dc9d7b
+  patches:
+    - osx_include_endian.h.patch  # [osx]
+    - osx_link_argp.patch  # [osx]
 
 build:
-  number: 0
-  skip: true  # [win or osx]
+  number: 1
+  skip: true  # [win]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x' ) }}
 
@@ -19,23 +22,24 @@ requirements:
   build:
     - {{ compiler('c') }}
     - meson
-    - pkg-config  # [osx or win]
+    - pkg-config  # [osx]
     - ninja
   host:
     - libcurl
-    - openssl
     - zstd
+    - openssl
+    - argp-standalone  # [osx]
   run:
     - libcurl
-    - openssl
     - zstd
+    - openssl
 
 test:
   commands:
-    - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}  # [unix]
-    - test -f ${PREFIX}/bin/zck  # [unix]
-    - test -f ${PREFIX}/include/zck.h  # [unix]
-    - test -f ${PREFIX}/lib/pkgconfig/zck.pc  # [unix]
+    - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}
+    - test -f ${PREFIX}/bin/zck
+    - test -f ${PREFIX}/include/zck.h
+    - test -f ${PREFIX}/lib/pkgconfig/zck.pc
 
 about:
   home: https://github.com/zchunk/zchunk
@@ -56,3 +60,4 @@ extra:
     - wolfv
     - JohanMabille
     - SylvainCorlay
+    - davidbrochart
