@@ -26,16 +26,14 @@ requirements:
     - ninja
   host:
     - libcurl  # [not win]
-    - zstd  # [not win]
     - libcurl-static  # [win]
-    - zstd-static  # [win]
+    - zstd
     - openssl
     - argp-standalone  # [osx]
   run:
     - libcurl  # [not win]
-    - zstd  # [not win]
     - libcurl-static  # [win]
-    - zstd-static  # [win]
+    - zstd
     - openssl
 
 test:
