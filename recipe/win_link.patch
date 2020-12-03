@@ -15,7 +15,7 @@
 -
 -curl_dep = dependency('libcurl')
 +zstdlib = cc.find_library('zstd')
-+curllib = cc.find_library('curl_a', dirs: join_paths(get_options('prefix'), get_options('libdir')))
++curllib = cc.find_library('curl_a', dirs: join_paths(get_option('prefix'), get_option('libdir')))
  
  if build_machine.system() == 'freebsd' or not cc.links('#include <argp.h>\nstatic error_t parse_opt (int key, char *arg, struct argp_state *state) { argp_usage(state); }; void main() {}')
      argplib = cc.find_library('argp')
