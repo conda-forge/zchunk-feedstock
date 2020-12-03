@@ -1,5 +1,3 @@
-pkg-config --list-all
-
 meson builddir -D c_std=c99 --prefix="%PREFIX%" --libdir="%LIBRARY_PREFIX%"
 if errorlevel 1 exit 1
 
