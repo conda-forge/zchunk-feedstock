@@ -25,12 +25,14 @@ requirements:
     - pkg-config  # [osx or win]
     - ninja
   host:
-    - libcurl
+    - libcurl  # [not win]
+    - libcurl-static  # [win]
     - zstd
     - openssl
     - argp-standalone  # [osx]
   run:
-    - libcurl
+    - libcurl  # [not win]
+    - libcurl-static  # [win]
     - zstd
     - openssl
 
