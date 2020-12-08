@@ -1,5 +1,5 @@
 {% set name = "zchunk" %}
-{% set version = "1.1.7" %}
+{% set version = "1.1.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
-  sha256: eb3d531916d6fea399520a2a4663099ddbf2278088599fa09980631067dc9d7b
+  sha256: a47c99ecb6edac984056b921619b64ff25609cecdc9645ca6c7279adf20114de
   patches:
     - osx_include_endian.h.patch  # [osx]
     - osx_link_argp.patch  # [osx]
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x' ) }}
