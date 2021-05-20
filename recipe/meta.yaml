@@ -1,5 +1,5 @@
 {% set name = "zchunk" %}
-{% set version = "1.1.12" %}
+{% set version = "1.1.13" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
-  sha256: 8dae041858826761fe702c5b8b217c45118f429dc6ccbf77e546d44dfbbe9f3f
+  sha256: da3c051874cc92141fcd2bcdd378c6956191aeadb9716e099a885b5c79f22b79
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x' ) }}
