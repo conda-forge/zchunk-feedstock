@@ -19,7 +19,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - meson
-    - pkg-config  # [osx]
+    - pkg-config
     - ninja
   host:
     - libcurl
