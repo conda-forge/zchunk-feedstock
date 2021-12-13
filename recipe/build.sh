@@ -1,8 +1,11 @@
 #! /bin/bash
 set -ex
 
-meson builddir --prefix=$PREFIX --libdir=$PREFIX/lib
-meson configure builddir
+meson setup builddir \
+    ${MESON_ARGS} \
+    --buildtype=release \
+    --prefix=$PREFIX \
+    --libdir=$PREFIX/lib
 
 ninja -v -C builddir -j${CPU_COUNT}
 
