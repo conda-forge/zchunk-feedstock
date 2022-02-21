@@ -1,0 +1,17 @@
+c_compiler:
+- vs2017
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+libcurl:
+- '7'
+openssl:
+- 1.1.1
+pin_run_as_build:
+  libcurl:
+    max_pin: x
+target_platform:
+- win-64
+zstd:
+- '1.5'
