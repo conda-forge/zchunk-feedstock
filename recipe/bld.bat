@@ -1,7 +1,7 @@
 meson setup builddir ^
     %MESON_ARGS% ^
     --buildtype=release ^
-    --prefix=%PREFIX%\Library ^
+    --prefix=%LIBRARY_PREFIX% ^
     -Dlibdir=lib
 
 ninja -v -C builddir

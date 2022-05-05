@@ -29,13 +29,19 @@ requirements:
     - libcurl
     - zstd
     - openssl
+    - ucrt  # [win]
 
 test:
   commands:
-    - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}
-    - test -f ${PREFIX}/bin/zck
-    - test -f ${PREFIX}/include/zck.h
-    - test -f ${PREFIX}/lib/pkgconfig/zck.pc
+    - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}  # [unix]
+    - test -f ${PREFIX}/bin/zck                 # [unix]
+    - test -f ${PREFIX}/include/zck.h           # [unix]
+    - test -f ${PREFIX}/lib/pkgconfig/zck.pc    # [unix]
+    - if not exist %LIBRARY_PREFIX%\include\zck.h (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\bin\zck-1.dll (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\bin\zck.exe (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\lib\pkgconfig\zck.pc (exit 1)  # [win]
+    - zck --help
 
 about:
   home: https://github.com/zchunk/zchunk
