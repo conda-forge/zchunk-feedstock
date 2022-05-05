@@ -1,23 +1,17 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
 c_compiler:
-- clang
-c_compiler_version:
-- '13'
+- vs2017
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 libcurl:
 - '7'
-macos_machine:
-- arm64-apple-darwin20.0.0
 openssl:
 - '3'
 pin_run_as_build:
   libcurl:
     max_pin: x
 target_platform:
-- osx-arm64
+- win-64
 zstd:
 - '1.5'
