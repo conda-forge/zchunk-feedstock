@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
   sha256: bc36f13b1bcb2ab52d046bfc3ec04a9bd1f89b070b4e8fca52eded235a583526
+  patches:
+    - zstd_arg.patch
 
 build:
   number: 0
