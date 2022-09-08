@@ -2,8 +2,7 @@
 {% set version = "1.2.2" %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: zchunk-split
 
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
@@ -12,38 +11,65 @@ source:
     - zstd_arg.patch
 
 build:
-  number: 0
-  run_exports:
-    - {{ pin_subpackage(name, max_pin='x.x' ) }}
+  number: 1
 
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - meson
-    - pkg-config
-    - ninja
-  host:
-    - libcurl
-    - zstd
-    - openssl
-    - argp-standalone  # [osx or win]
-  run:
-    - libcurl
-    - zstd
-    - openssl
-    - ucrt  # [win]
+outputs:
+  - name: zchunk
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - meson
+        - pkg-config
+        - ninja
+      host:
+        - libcurl
+        - zstd
+        - openssl
+        - argp-standalone  # [osx or win]
+      run:
+        - libcurl
+        - zstd
+        - openssl
+        - ucrt  # [win]
 
-test:
-  commands:
-    - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}  # [unix]
-    - test -f ${PREFIX}/bin/zck                 # [unix]
-    - test -f ${PREFIX}/include/zck.h           # [unix]
-    - test -f ${PREFIX}/lib/pkgconfig/zck.pc    # [unix]
-    - if not exist %LIBRARY_PREFIX%\include\zck.h (exit 1)  # [win]
-    - if not exist %LIBRARY_PREFIX%\bin\zck-1.dll (exit 1)  # [win]
-    - if not exist %LIBRARY_PREFIX%\bin\zck.exe (exit 1)  # [win]
-    - if not exist %LIBRARY_PREFIX%\lib\pkgconfig\zck.pc (exit 1)  # [win]
-    - zck --help
+    build:
+      run_exports:
+        - {{ pin_subpackage(name, max_pin='x.x' ) }}
+
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}  # [unix]
+        - test -f ${PREFIX}/bin/zck                 # [unix]
+        - test -f ${PREFIX}/include/zck.h           # [unix]
+        - test -f ${PREFIX}/lib/pkgconfig/zck.pc    # [unix]
+        - if not exist %LIBRARY_PREFIX%\include\zck.h (exit 1)  # [win]
+        - if not exist %LIBRARY_PREFIX%\bin\zck-1.dll (exit 1)  # [win]
+        - if not exist %LIBRARY_PREFIX%\bin\zck.exe (exit 1)  # [win]
+        - if not exist %LIBRARY_PREFIX%\lib\pkgconfig\zck.pc (exit 1)  # [win]
+        - zck --help
+
+  - name: zchunk-static
+    reqiurements:
+      build:
+        - {{ compiler('c') }}
+        - meson
+        - pkg-config
+        - ninja
+      host:
+        - {{ pin_subpackage('zchunk', exact=True) }}
+        - libcurl
+        - zstd
+        - openssl
+        - argp-standalone  # [osx or win]
+      run:
+        - {{ pin_subpackage('zchunk', exact=True) }}
+
+    test:
+      commands:
+        - test -f $PREFIX/lib/libzck.a  # [not win]
+        - if not exist %LIBRARY_LIB%\libzck_a.lib exit 1  # [win]
+
+
 
 about:
   home: https://github.com/zchunk/zchunk
