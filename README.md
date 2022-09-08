@@ -1,5 +1,5 @@
-About zchunk
-============
+About zchunk-split
+==================
 
 Home: https://github.com/zchunk/zchunk
 
@@ -139,27 +139,28 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-zchunk-green.svg)](https://anaconda.org/conda-forge/zchunk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/zchunk.svg)](https://anaconda.org/conda-forge/zchunk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/zchunk.svg)](https://anaconda.org/conda-forge/zchunk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/zchunk.svg)](https://anaconda.org/conda-forge/zchunk) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-zchunk--static-green.svg)](https://anaconda.org/conda-forge/zchunk-static) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/zchunk-static.svg)](https://anaconda.org/conda-forge/zchunk-static) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/zchunk-static.svg)](https://anaconda.org/conda-forge/zchunk-static) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/zchunk-static.svg)](https://anaconda.org/conda-forge/zchunk-static) |
 
-Installing zchunk
-=================
+Installing zchunk-split
+=======================
 
-Installing `zchunk` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `zchunk-split` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `zchunk` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `zchunk, zchunk-static` can be installed with `conda`:
 
 ```
-conda install zchunk
+conda install zchunk zchunk-static
 ```
 
 or with `mamba`:
 
 ```
-mamba install zchunk
+mamba install zchunk zchunk-static
 ```
 
 It is possible to list all of the versions of `zchunk` available on your platform with `conda`:
@@ -229,17 +230,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating zchunk-feedstock
-=========================
+Updating zchunk-split-feedstock
+===============================
 
-If you would like to improve the zchunk recipe or build a new
+If you would like to improve the zchunk-split recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/zchunk-feedstock are
+Note that all branches in the conda-forge/zchunk-split-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
