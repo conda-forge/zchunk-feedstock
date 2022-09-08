@@ -3,6 +3,7 @@
 
 package:
   name: zchunk-split
+  version: {{ version }}
 
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
@@ -31,11 +32,9 @@ outputs:
         - zstd
         - openssl
         - ucrt  # [win]
-
     build:
       run_exports:
         - {{ pin_subpackage(name, max_pin='x.x' ) }}
-
     test:
       commands:
         - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}  # [unix]
@@ -49,7 +48,7 @@ outputs:
         - zck --help
 
   - name: zchunk-static
-    reqiurements:
+    requirements:
       build:
         - {{ compiler('c') }}
         - meson
@@ -63,13 +62,10 @@ outputs:
         - argp-standalone  # [osx or win]
       run:
         - {{ pin_subpackage('zchunk', exact=True) }}
-
     test:
       commands:
         - test -f $PREFIX/lib/libzck.a  # [not win]
         - if not exist %LIBRARY_LIB%\libzck_a.lib exit 1  # [win]
-
-
 
 about:
   home: https://github.com/zchunk/zchunk
