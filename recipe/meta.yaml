@@ -16,6 +16,8 @@ build:
 
 outputs:
   - name: zchunk
+    script: build_zchunk.sh                   # [unix]
+    script: build_zchunk.bat                  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -48,6 +50,8 @@ outputs:
         - zck --help
 
   - name: zchunk-static
+    script: build_zchunk.sh                   # [unix]
+    script: build_zchunk.bat                  # [win]
     requirements:
       build:
         - {{ compiler('c') }}

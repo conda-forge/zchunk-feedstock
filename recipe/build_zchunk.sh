@@ -23,6 +23,8 @@ fi
 
 ninja -v -C builddir -j${CPU_COUNT}
 
-ninja -C builddir test
+if [[ $PGK_NAME == "zchunk" ]]; then
+    ninja -C builddir test
+fi
 
 ninja -C builddir install
