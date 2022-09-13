@@ -1,5 +1,5 @@
 if %PKG_NAME% == *static (
-    set STATIC_ARGS="--default-library=static --prefer-static"
+    set STATIC_ARGS="--default-library=static"
 )
 
 meson setup builddir ^
