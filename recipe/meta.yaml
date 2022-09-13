@@ -11,6 +11,7 @@ source:
   patches:
     - zstd_arg.patch
     - static_write_data.patch
+    - windows_static_lib.patch
 
 build:
   number: 1
@@ -70,7 +71,7 @@ outputs:
     test:
       commands:
         - test -f $PREFIX/lib/libzck.a  # [not win]
-        - if not exist %LIBRARY_LIB%\libzck_a.lib exit 1  # [win]
+        - if not exist %LIBRARY_LIB%\libzck.lib exit 1  # [win]
 
 about:
   home: https://github.com/zchunk/zchunk

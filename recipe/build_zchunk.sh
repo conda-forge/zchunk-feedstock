@@ -17,6 +17,7 @@ elif [[ $PKG_NAME == "zchunk" ]]; then
     meson setup builddir \
         ${MESON_ARGS} \
         --buildtype=release \
+        --default-library=shared\
         --prefix=$PREFIX \
         -Dlibdir=lib
 fi

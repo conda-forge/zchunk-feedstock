@@ -1,10 +1,14 @@
-if %PKG_NAME% == *static (
-    set STATIC_ARGS="--default-library=static"
+if "%PKG_NAME%" == "zchunk-static" (
+    set LIB_TYPE_ARGS="--default-library=static"
+) else (
+    set LIB_TYPE_ARGS="--default-library=shared"
 )
+
+rd /s /q builddir
 
 meson setup builddir ^
     %MESON_ARGS% ^
-    %STATIC_ARGS% ^
+    %LIB_TYPE_ARGS% ^
     --buildtype=release ^
     --prefix=%LIBRARY_PREFIX% ^
     -Dlibdir=lib
