@@ -1,5 +1,5 @@
 {% set name = "zchunk" %}
-{% set version = "1.2.2" %}
+{% set version = "1.2.3" %}
 
 package:
   name: zchunk-split
@@ -7,19 +7,19 @@ package:
 
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
-  sha256: bc36f13b1bcb2ab52d046bfc3ec04a9bd1f89b070b4e8fca52eded235a583526
+  sha256: e24bad88ad80fbb8b2f1cbd93206bad2ed32ea19d3d59eac43d224484e6b0c93
   patches:
     - zstd_arg.patch
     - static_write_data.patch
     - windows_static_lib.patch
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - name: zchunk
-    script: build_zchunk.sh                   # [unix]
-    script: build_zchunk.bat                  # [win]
+    script: build_zchunk.sh  # [unix]
+    script: build_zchunk.bat  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -52,8 +52,8 @@ outputs:
         - zck --help
 
   - name: zchunk-static
-    script: build_zchunk.sh                   # [unix]
-    script: build_zchunk.bat                  # [win]
+    script: build_zchunk.sh  # [unix]
+    script: build_zchunk.bat  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
