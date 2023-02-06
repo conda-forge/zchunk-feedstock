@@ -10,6 +10,7 @@ meson setup builddir ^
     %MESON_ARGS% ^
     %LIB_TYPE_ARGS% ^
     --buildtype=release ^
+    -Db_vscrt=static_from_buildtype ^
     --prefix=%LIBRARY_PREFIX% ^
     -Dlibdir=lib
 
