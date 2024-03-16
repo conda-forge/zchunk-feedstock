@@ -1,5 +1,5 @@
 {% set name = "zchunk" %}
-{% set version = "1.3.2" %}
+{% set version = "1.4.0" %}
 
 package:
   name: zchunk-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
-  sha256: 4d923d32af7db33f3c0a6655b258e857a2ca564912cf85ddce14e9b1b7d495bf
+  sha256: 6def0481935006052774e034a22c18a1b668b8c93510188673138312003890eb
   patches:
     - zstd_arg.patch
 
