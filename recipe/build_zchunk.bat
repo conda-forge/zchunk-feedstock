@@ -19,7 +19,9 @@ set "LIBRARY_PREFIX_FWD=%LIBRARY_PREFIX:\=/%"
     echo Libs: %LIBRARY_PREFIX_FWD%/lib/libargp.a
     echo Cflags: -I%LIBRARY_PREFIX_FWD%/include
 ) > "%ARGP_PC_DIR%\argp-standalone.pc"
-set "PKG_CONFIG_PATH=%ARGP_PC_DIR%;%PKG_CONFIG_PATH%"
+:: meson overrides PKG_CONFIG_PATH with --pkg-config-path from MESON_ARGS,
+:: but leaves PKG_CONFIG_LIBDIR alone
+set "PKG_CONFIG_LIBDIR=%ARGP_PC_DIR%"
 
 meson setup builddir ^
     %MESON_ARGS% ^
