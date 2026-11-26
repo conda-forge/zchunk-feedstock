@@ -27,6 +27,9 @@ meson setup builddir ^
     %MESON_ARGS% ^
     --default-library=%LIB_TYPE% ^
     --wrap-mode=nofallback ^
+    -Dwith-zstd=enabled ^
+    -Dwith-openssl=enabled ^
+    -Dwith-curl=enabled ^
     -Db_vscrt=md
 if errorlevel 1 exit 1
 
