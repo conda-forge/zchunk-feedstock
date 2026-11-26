@@ -1,21 +1,22 @@
 if "%PKG_NAME%" == "zchunk-static" (
-    set LIB_TYPE_ARGS="--default-library=static"
+    set LIB_TYPE=static
 ) else (
-    set LIB_TYPE_ARGS="--default-library=shared"
+    set LIB_TYPE=shared
 )
 
-rd /s /q builddir
+if exist builddir rd /s /q builddir
 
 meson setup builddir ^
     %MESON_ARGS% ^
-    %LIB_TYPE_ARGS% ^
-    --buildtype=release ^
-    -Db_vscrt=static_from_buildtype ^
-    --prefix=%LIBRARY_PREFIX% ^
-    -Dlibdir=lib
+    --default-library=%LIB_TYPE% ^
+    -Db_vscrt=static_from_buildtype
+if errorlevel 1 exit 1
 
 ninja -v -C builddir
+if errorlevel 1 exit 1
 
 ninja -C builddir test
+if errorlevel 1 exit 1
 
 ninja -C builddir install
+if errorlevel 1 exit 1
