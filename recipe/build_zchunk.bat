@@ -9,7 +9,7 @@ if exist builddir rd /s /q builddir
 meson setup builddir ^
     %MESON_ARGS% ^
     --default-library=%LIB_TYPE% ^
-    -Db_vscrt=static_from_buildtype
+    -Db_vscrt=md
 if errorlevel 1 exit 1
 
 ninja -v -C builddir
