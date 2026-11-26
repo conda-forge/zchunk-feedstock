@@ -105,6 +105,7 @@ about:
     you downloaded is, in fact, the file you wanted.
 
 extra:
+  feedstock-name: zchunk
   recipe-maintainers:
     - wolfv
     - JohanMabille
