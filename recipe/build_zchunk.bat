@@ -1,21 +1,40 @@
 if "%PKG_NAME%" == "zchunk-static" (
-    set LIB_TYPE_ARGS="--default-library=static"
+    set LIB_TYPE=static
 ) else (
-    set LIB_TYPE_ARGS="--default-library=shared"
+    set LIB_TYPE=shared
 )
 
-rd /s /q builddir
+if exist builddir rd /s /q builddir
+
+:: conda-forge's argp-standalone only ships libargp.a, which meson's MSVC
+:: find_library no longer picks up; describe it via a pkg-config file instead
+:: (kept outside of the prefix so it is not packaged)
+set "ARGP_PC_DIR=%SRC_DIR%\argp-pc"
+if not exist "%ARGP_PC_DIR%" mkdir "%ARGP_PC_DIR%"
+set "LIBRARY_PREFIX_FWD=%LIBRARY_PREFIX:\=/%"
+(
+    echo Name: argp-standalone
+    echo Description: argp-standalone from conda-forge
+    echo Version: 1.5.0
+    echo Libs: %LIBRARY_PREFIX_FWD%/lib/libargp.a
+    echo Cflags: -I%LIBRARY_PREFIX_FWD%/include
+) > "%ARGP_PC_DIR%\argp-standalone.pc"
+:: meson overrides PKG_CONFIG_PATH with --pkg-config-path from MESON_ARGS,
+:: but leaves PKG_CONFIG_LIBDIR alone
+set "PKG_CONFIG_LIBDIR=%ARGP_PC_DIR%"
 
 meson setup builddir ^
     %MESON_ARGS% ^
-    %LIB_TYPE_ARGS% ^
-    --buildtype=release ^
-    -Db_vscrt=static_from_buildtype ^
-    --prefix=%LIBRARY_PREFIX% ^
-    -Dlibdir=lib
+    --default-library=%LIB_TYPE% ^
+    --wrap-mode=nofallback ^
+    -Db_vscrt=md
+if errorlevel 1 exit 1
 
 ninja -v -C builddir
+if errorlevel 1 exit 1
 
 ninja -C builddir test
+if errorlevel 1 exit 1
 
 ninja -C builddir install
+if errorlevel 1 exit 1

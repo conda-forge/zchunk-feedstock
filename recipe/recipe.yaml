@@ -1,0 +1,129 @@
+context:
+  version: "1.3.2"
+
+recipe:
+  name: zchunk-split
+  version: ${{ version }}
+
+source:
+  url: https://github.com/zchunk/zchunk/archive/${{ version }}.tar.gz
+  sha256: 4d923d32af7db33f3c0a6655b258e857a2ca564912cf85ddce14e9b1b7d495bf
+  patches:
+    - zstd_arg.patch
+
+build:
+  number: 1
+
+outputs:
+  - package:
+      name: zchunk
+    build:
+      script: build_zchunk
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - meson
+        - pkgconf
+        - ninja
+      host:
+        - libcurl
+        # libcurl.pc requires zlib.pc
+        - zlib
+        - zstd
+        - openssl
+        - if: osx or win
+          then: argp-standalone
+      ignore_run_exports:
+        by_name:
+          # only needed for libcurl.pc resolution
+          - libzlib
+      run:
+        - libcurl
+        - zstd
+        - openssl
+        - if: win
+          then: ucrt
+      run_exports:
+        - ${{ pin_subpackage('zchunk', upper_bound='x.x') }}
+    tests:
+      - package_contents:
+          include:
+            - zck.h
+          bin:
+            - zck
+            - zckdl
+          files:
+            exists:
+              - if: unix
+                then:
+                  - lib/pkgconfig/zck.pc
+                else:
+                  - Library/lib/pkgconfig/zck.pc
+                  - Library/bin/zck-1.dll
+                  - Library/lib/zck.lib
+              - if: linux
+                then: lib/libzck.so
+              - if: osx
+                then: lib/libzck.dylib
+            # make sure the bundled argp subproject is not installed
+            not_exists:
+              - if: unix
+                then: include/argp.h
+                else: Library/include/argp.h
+      - script:
+          - zck --help
+
+  - package:
+      name: zchunk-static
+    build:
+      script: build_zchunk
+      files:
+        - if: unix
+          then: lib/libzck.a
+          else: Library/lib/libzck.lib
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - meson
+        - pkgconf
+        - ninja
+      host:
+        - ${{ pin_subpackage('zchunk', exact=True) }}
+        - libcurl
+        # libcurl.pc requires zlib.pc
+        - zlib
+        - zstd
+        - openssl
+        - if: osx or win
+          then: argp-standalone
+      run:
+        - ${{ pin_subpackage('zchunk', exact=True) }}
+    tests:
+      - package_contents:
+          files:
+            - if: unix
+              then: lib/libzck.a
+              else: Library/lib/libzck.lib
+
+about:
+  homepage: https://github.com/zchunk/zchunk
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: A file format designed for highly efficient deltas while maintaining good compression
+  description: |
+    zchunk is a compressed file format that splits the file into independent
+    chunks. This allows you to only download changed chunks when downloading a
+    new version of the file, and also makes zchunk files efficient over rsync.
+
+    zchunk files are protected with strong checksums to verify that the file
+    you downloaded is, in fact, the file you wanted.
+
+extra:
+  feedstock-name: zchunk
+  recipe-maintainers:
+    - wolfv
+    - JohanMabille
+    - SylvainCorlay
+    - davidbrochart
