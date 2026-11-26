@@ -6,8 +6,20 @@ if "%PKG_NAME%" == "zchunk-static" (
 
 if exist builddir rd /s /q builddir
 
-:: let MSVC's find_library locate conda's libargp.a
-set "LIB=%LIBRARY_LIB%;%LIB%"
+:: conda-forge's argp-standalone only ships libargp.a, which meson's MSVC
+:: find_library no longer picks up; describe it via a pkg-config file instead
+:: (kept outside of the prefix so it is not packaged)
+set "ARGP_PC_DIR=%SRC_DIR%\argp-pc"
+if not exist "%ARGP_PC_DIR%" mkdir "%ARGP_PC_DIR%"
+set "LIBRARY_PREFIX_FWD=%LIBRARY_PREFIX:\=/%"
+(
+    echo Name: argp-standalone
+    echo Description: argp-standalone from conda-forge
+    echo Version: 1.5.0
+    echo Libs: %LIBRARY_PREFIX_FWD%/lib/libargp.a
+    echo Cflags: -I%LIBRARY_PREFIX_FWD%/include
+) > "%ARGP_PC_DIR%\argp-standalone.pc"
+set "PKG_CONFIG_PATH=%ARGP_PC_DIR%;%PKG_CONFIG_PATH%"
 
 meson setup builddir ^
     %MESON_ARGS% ^
