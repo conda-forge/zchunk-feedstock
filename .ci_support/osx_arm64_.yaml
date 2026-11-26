@@ -20,5 +20,7 @@ openssl:
 - '3.5'
 target_platform:
 - osx-arm64
+zlib:
+- '1'
 zstd:
 - '1.6'

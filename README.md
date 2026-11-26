@@ -1,5 +1,5 @@
-About zchunk-split-feedstock
-============================
+About zchunk-feedstock
+======================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/zchunk-feedstock/blob/main/LICENSE.txt)
 
@@ -15,7 +15,6 @@ new version of the file, and also makes zchunk files efficient over rsync.
 
 zchunk files are protected with strong checksums to verify that the file
 you downloaded is, in fact, the file you wanted.
-
 
 Current build status
 ====================
@@ -71,10 +70,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-zchunk-green.svg)](https://anaconda.org/conda-forge/zchunk) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/zchunk.svg)](https://anaconda.org/conda-forge/zchunk) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/zchunk.svg)](https://anaconda.org/conda-forge/zchunk) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/zchunk.svg)](https://anaconda.org/conda-forge/zchunk) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-zchunk--static-green.svg)](https://anaconda.org/conda-forge/zchunk-static) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/zchunk-static.svg)](https://anaconda.org/conda-forge/zchunk-static) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/zchunk-static.svg)](https://anaconda.org/conda-forge/zchunk-static) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/zchunk-static.svg)](https://anaconda.org/conda-forge/zchunk-static) |
 
-Installing zchunk-split
-=======================
+Installing zchunk
+=================
 
-Installing `zchunk-split` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `zchunk` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -203,17 +202,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating zchunk-split-feedstock
-===============================
+Updating zchunk-feedstock
+=========================
 
-If you would like to improve the zchunk-split recipe or build a new
+If you would like to improve the zchunk recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/zchunk-split-feedstock are
+Note that all branches in the conda-forge/zchunk-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.

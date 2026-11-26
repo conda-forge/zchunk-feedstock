@@ -20,5 +20,7 @@ openssl:
 - '3.5'
 target_platform:
 - linux-aarch64
+zlib:
+- '1'
 zstd:
 - '1.6'
