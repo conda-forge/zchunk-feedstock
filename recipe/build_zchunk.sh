@@ -1,30 +1,20 @@
-#! /bin/bash
+#!/bin/bash
 set -ex
 
 rm -rf builddir
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$BUILD_PREFIX/lib/pkgconfig
-export PKG_CONFIG=$BUILD_PREFIX/bin/pkg-config
-
-if [[ $PKG_NAME == "zchunk-static" ]]; then
-    meson setup builddir \
-        ${MESON_ARGS} \
-        --buildtype=release \
-        --default-library=static \
-        --prefix=$PREFIX \
-        -Dlibdir=lib
-elif [[ $PKG_NAME == "zchunk" ]]; then
-    meson setup builddir \
-        ${MESON_ARGS} \
-        --buildtype=release \
-        --default-library=shared\
-        --prefix=$PREFIX \
-        -Dlibdir=lib
+if [[ "${PKG_NAME}" == "zchunk-static" ]]; then
+    LIB_TYPE=static
+else
+    LIB_TYPE=shared
 fi
 
+meson setup builddir \
+    ${MESON_ARGS} \
+    --default-library=${LIB_TYPE}
 
 ninja -v -C builddir -j${CPU_COUNT}
-
-ninja -C builddir test
-
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
+    ninja -C builddir test
+fi
 ninja -C builddir install
