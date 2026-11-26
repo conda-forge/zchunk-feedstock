@@ -34,6 +34,10 @@ outputs:
         - openssl
         - if: osx or win
           then: argp-standalone
+      ignore_run_exports:
+        by_name:
+          # only needed for libcurl.pc resolution
+          - libzlib
       run:
         - libcurl
         - zstd
@@ -46,15 +50,27 @@ outputs:
       - package_contents:
           include:
             - zck.h
-          lib:
-            - zck
           bin:
             - zck
             - zckdl
           files:
-            - if: unix
-              then: lib/pkgconfig/zck.pc
-              else: Library/lib/pkgconfig/zck.pc
+            exists:
+              - if: unix
+                then:
+                  - lib/pkgconfig/zck.pc
+                else:
+                  - Library/lib/pkgconfig/zck.pc
+                  - Library/bin/zck-1.dll
+                  - Library/lib/zck.lib
+              - if: linux
+                then: lib/libzck.so
+              - if: osx
+                then: lib/libzck.dylib
+            # make sure the bundled argp subproject is not installed
+            not_exists:
+              - if: unix
+                then: include/argp.h
+                else: Library/include/argp.h
       - script:
           - zck --help
 

@@ -11,7 +11,8 @@ fi
 
 meson setup builddir \
     ${MESON_ARGS} \
-    --default-library=${LIB_TYPE}
+    --default-library=${LIB_TYPE} \
+    --wrap-mode=nofallback
 
 ninja -v -C builddir -j${CPU_COUNT}
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
