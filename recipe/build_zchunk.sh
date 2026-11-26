@@ -12,7 +12,10 @@ fi
 meson setup builddir \
     ${MESON_ARGS} \
     --default-library=${LIB_TYPE} \
-    --wrap-mode=nofallback
+    --wrap-mode=nofallback \
+    -Dwith-zstd=enabled \
+    -Dwith-openssl=enabled \
+    -Dwith-curl=enabled
 
 ninja -v -C builddir -j${CPU_COUNT}
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
